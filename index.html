@@ -1,0 +1,30 @@
+<html ng-app="shoppingListApp">
+<head>
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div ng-controller="shoppingListAppController as list">
+    <div>
+      Items: <input type="text" ng-model="list.itemName">
+      <br>
+      <br>
+    </div>
+    <div>
+      Qunatity: <input type="text" ng-model="list.qtyName">
+      <br>
+      <br>
+    </div>
+    <div>
+      <button type="text" ng-click="list.addItems();">Add Item</button>
+    </div>
+    <div>
+      <br>
+      <br>
+      <ol>
+        <li ng-repeat="item in list.addedList">{{item.name}}   {{item.quantity}}</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
