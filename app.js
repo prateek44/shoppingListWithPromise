@@ -41,28 +41,57 @@
       console.log('current item received',currentItem);
       console.log('calling validateService checkItem() to perform background validation');
       var promiseItemName=validateService.checkItemName(currentItem);
-      console.log('promiseItemName',promiseItemName);
-      promiseItemName.then(function(resolved)
-    {
-      console.log('',currentItem);
-      console.log();
       var promiseItemQty=validateService.checkItemQuantity(currentItem);
-      promiseItemQty.then(function(resolved)
+      console.log('promiseItemName',promiseItemName);
+      $q.all([promiseItemName,promiseItemQty]).
+      then(function(resolve)
     {
       console.log('item ready to add to cart',currentItem);
       service.itemsList.push(currentItem);
       console.log('item added to add to cart',currentItem);
 
-    },function(rejected)
+    }).
+    catch(function(error)
   {
-
+    console.log(error.message);
   });
-
-    },function(rejected)
-  {
-
-  });
-
+  //     promiseItemName.then(function(resolved)
+  //   {
+  //     console.log('',currentItem);
+  //     console.log();
+  //     var promiseItemQty=validateService.checkItemQuantity(currentItem);
+  //     promiseItemQty.then(function(resolved)
+  //   {
+  //     console.log('item ready to add to cart',currentItem);
+  //     service.itemsList.push(currentItem);
+  //     console.log('item added to add to cart',currentItem);
+  //
+  //   },function(rejected)
+  // {
+  //
+  // });
+  //
+  //   },function(rejected)
+  // {
+  //
+  // });
+//   promiseItemName.then(function(resolved)
+// {
+//   return validateService.checkItemQuantity(currentItem);
+//
+// })
+// .then(function()
+// {
+//   console.log('item ready to add to cart',currentItem);
+//   service.itemsList.push(currentItem);
+//   console.log('item added to add to cart',currentItem);
+//
+// })
+// .catch(function(error)
+// {
+//   console.log(error.message);
+//
+// });
 
 console.log('service.itemsList',service.itemsList);
 return service.itemsList;
